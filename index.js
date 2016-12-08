@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({   // to support URL-encoded bodies
 })); 
 //set up app to subscribe to SNS topic
 app.use(sns({
-    topic: 'arn:aws:sns:us-west-2:582365505189:waveform-generation'
+    topic: process.env.ARN
 }));
 
 const request = require('request');
@@ -22,8 +22,8 @@ const _FILEPATH = '/tmp/';
 const _SUBSCRIPTION = 'SubscriptionConfirmation';
 const _NOTIFICATION = 'Notification';
 const _AWS_SNS_HEADER = 'x-amz-sns-message-type';
-const _SONG_BUCKET = '';
-const _WAVEFORM_BUCKET = '';
+const _SONG_BUCKET = process.env.IN_BUCKET;
+const _WAVEFORM_BUCKET = process.env.OUT_BUCKET;
 
 
 //Send post request to S3 with the waveform file
