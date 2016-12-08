@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.7.10",
+    "aws-snsclient": "^0.2.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "request": "^2.79.0"
