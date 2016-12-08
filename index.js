@@ -71,7 +71,7 @@ function createWaveform(fileWithPath){
 			env: null
 		};
 		//run audiowavefrom command
-		exec('audiowaveform -i '+file+' --pixels-per-second 8 -b 8 -o '+fileNameNoExt+'.'+extType, execOptions, 
+		exec('audiowaveform -i '+fileWithPath+' --pixels-per-second 8 -b 8 -o '+fileNameNoExt+'.'+extType, execOptions, 
 			function(error, stdout, stderr){
 				if (error) {
 					console.error(`exec error: ${error}`);
