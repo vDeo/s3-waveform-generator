@@ -107,8 +107,8 @@ function saveSong(songData, songFileName){
 // Endpoint which handles subscription message/notifcation from Amazon SNS service, 
 // retreives audioFile from S3 and triggers wavefrom creation
 app.post('/createwaveform', function(req, res){
-		const message = req.snsMessage;
-		const snsType = message.Type;
+		const notification = req.snsMessage;
+		const snsType = notification.Type;
 		console.log(snsType);
 		if(typeof(snsType) === undefined){
 			res.status(500).send();
@@ -116,7 +116,7 @@ app.post('/createwaveform', function(req, res){
 		}
 		//Subsribe to Amazon topic
 		if(snsType === _SUBSCRIPTION){
-			const subscriptionUrl = message.SubscribeURL;
+			const subscriptionUrl = notification.SubscribeURL;
 			console.log(subscriptionUrl);
 			//Send get request to subscriptionUrl to subscribe to topic
 			request.get(subscriptionUrl);
@@ -124,7 +124,7 @@ app.post('/createwaveform', function(req, res){
 			res.status(200).send();
 		}else if(snsType === _NOTIFICATION){
 			//Retreive file from S3 using objectKey and begin Waveform creation
-			const s3FileKey = message.objectKey;
+			const s3FileKey = notification.Message.object.Key;
 			console.log(message);
 			const s3Params = {
 				Bucket: _SONG_BUCKET,
