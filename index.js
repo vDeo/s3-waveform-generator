@@ -146,7 +146,7 @@ app.post('/createwaveform', function(req, res){
 });
 
 app.get('/', function(req, res){
-	console.log('hello-world');
+	console.log('s3-waveform-generator accessed!');
 });
 
-app.listen(3000);
+app.listen(8080);
