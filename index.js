@@ -77,8 +77,8 @@ function createWaveform(fileWithPath){
 					console.error(`exec error: ${error}`);
 					reject(err);
 				}
-				console.log(`stdout: ${stdout}`);
-				console.log(`stderr: ${stderr}`);
+				console.log('wavefrom stdout', `stdout: ${stdout}`);
+				console.log('waveform stderr',`stderr: ${stderr}`);
 				//delete audio file synchronously
 				fs.unlinkSync(fileWithPath);
 				//return path+name of waveform
@@ -95,7 +95,7 @@ function saveSong(songData, songFileName){
 		//save file with generic name that will be overwritten with every request
 		fs.writeFile(file, songData.Body, function(err){
 			if(err){
-				console.log(err);
+				console.log('writesongerror', err);
 				reject(err);
 			}else{
 				resolve(file);
@@ -135,7 +135,7 @@ app.post('/createwaveform', function(req, res){
 			s3.getObject(s3Params, function(err, data){
 				if(err){
 					//If error, log it and resend notification again
-					console.log(err, err.stack);
+					console.log('getObject error', err, err.stack);
 					res.status(500).send();
 				}else{
 					//Begin Waveform creation process, and send success code if successful, else send failure code to resend notification.
@@ -143,10 +143,12 @@ app.post('/createwaveform', function(req, res){
 					then(createWaveform).
 					then(sendWaveformToS3).
 					then(function(s3UploadData){
+						console.log("success! new wave created on", Date.now());
 						console.log(s3UploadData.toString());
+						
 						res.status(200).send();
 					}).catch(function(err){
-						console.log(err);
+						console.log('savesongerror',err);
 						res.status(500).send();
 					});	
 				}
