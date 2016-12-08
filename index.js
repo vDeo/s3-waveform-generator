@@ -124,7 +124,7 @@ app.post('/createwaveform', function(req, res){
 			res.status(200).send();
 		}else if(snsType === _NOTIFICATION){
 			//Retreive file from S3 using objectKey and begin Waveform creation
-			const s3FileKey = notification.Message.object.Key;
+			const s3FileKey = notification.Message.object.key;
 			console.log(message);
 			const s3Params = {
 				Bucket: _SONG_BUCKET,
