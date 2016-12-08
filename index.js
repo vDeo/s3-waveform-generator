@@ -98,7 +98,7 @@ function saveSong(songData, songFileName){
 				console.log(err);
 				reject(err);
 			}else{
-				reslove(file);
+				resolve(file);
 			}	
 		});
 	});
