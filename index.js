@@ -34,7 +34,7 @@ function sendWaveformToS3(waveformFileName){
 			if(err){
 				reject(err);
 			}
-			const filename = waveformFileName.split(_FILEPATH)[1];
+			const fileName = waveformFileName.split(_FILEPATH)[1];
 			//set s3 params to include waveform bucket, and buffer data.
 			const s3Params = {
 				Bucket: _WAVEFORM_BUCKET,
